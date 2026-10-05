@@ -9,7 +9,7 @@ export default defineConfig({
   base,
   cleanUrls: false,
   lastUpdated: true,
-  sitemap: { hostname: 'https://jinnang233.github.io/Krypt04Mcg-Website/' },
+  sitemap: { hostname: 'https://krypt04mcg.buranko.top/' },
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: `${base}logo.svg` }],
     ['meta', { name: 'theme-color', content: '#14856c' }],
