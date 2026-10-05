@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 
-const base = '/Krypt04Mcg-Website/'
+const base = '/'
 
 export default defineConfig({
   lang: 'zh-CN',
