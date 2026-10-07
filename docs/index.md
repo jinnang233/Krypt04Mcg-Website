@@ -19,12 +19,12 @@ hero:
 features:
   - icon: ⌘
     title: 从聊天框开始
-    details: 用 /k04m 发送消息，或打开加密聊天面板。默认聊天传输无需安装服务端插件。
+    details: 用 /k04m 发送消息，或使用聊天面板与 0.27.0 起提供的密钥管理界面。默认聊天传输无需安装服务端插件。
     link: /guide/commands
     linkText: 认识客户端命令
   - icon: ◈
     title: 后量子算法选项
-    details: 可配置 KEM、签名与 AEAD；通过公钥导入和完整指纹核对管理玩家身份。
+    details: 可配置 PQC / 混合 KEM、复合签名与 AEAD；通过密钥管理界面、TOFU 和完整指纹核对管理玩家身份。
     link: /guide/keys
     linkText: 了解密钥与信任
   - icon: ⇄
