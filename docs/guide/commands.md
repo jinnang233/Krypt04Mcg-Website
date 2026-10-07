@@ -43,10 +43,11 @@
 
 | 命令 | 用途 |
 | --- | --- |
+| `/k04m key` / `/k04m key gui` | 打开密钥管理界面（0.27.0 起） |
 | `/k04m key list` | 列出密钥 |
 | `/k04m key fingerprint <player>` | 查看完整指纹 |
 | `/k04m key export` | 导出当前账号可分享的公钥 JSON |
-| `/k04m key import <player> <data-or-file>` | 导入公钥 JSON 或文件 |
+| `/k04m key import <player> <data-or-file>` | 导入公钥文件路径、JSON 或 Base64URL |
 | `/k04m key delete <player>` | 移除该玩家的导入公钥、信任和保存会话 |
 | `/k04m key remove <player>` | `delete` 的别名 |
 | `/k04m key regenerate` | 显示当前 KEM 指纹与重新生成的确认命令 |
@@ -56,6 +57,8 @@
 | `/k04m key distrust <player>` | 将身份标记为不信任，拒绝相应消息和会话变更 |
 
 玩家名不区分大小写；不能用 `delete` 删除自己的密钥。密钥替换会影响现有信任，请先阅读[密钥指南](./keys.md)。
+
+0.27.0 的密钥管理界面与这些命令使用相同的存储和信任规则。左侧列出本机身份与已导入玩家并显示信任状态，右侧显示算法和可复制的完整指纹；底部提供导入、导出和重新生成，联系人条目还提供 Verify、Distrust 与 Delete。也可以在 Controls 中绑定默认未分配的 **Open Key Manager** 按键。
 
 ## 可选共享
 
