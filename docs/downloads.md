@@ -13,7 +13,7 @@
 | 客户端 | Fabric / NeoForge 对应模组 JAR | [Krypt04Mcg Releases](https://github.com/jinnang233/Krypt04Mcg/releases) |
 | 中继插件 | Krypt04McgRelay JAR | [插件 Releases](https://github.com/jinnang233/Krypt04mcg-plugin/releases) |
 
-安装步骤分别见[客户端安装](./guide/installation.md)和[中继安装](./relay/index.md)。项目 README 当前目标为 Minecraft `26.3`、Java `25`，实际下载以 Release 说明为准。
+安装步骤分别见[客户端安装](./guide/installation.md)和[中继安装](./relay/index.md)。项目 README 当前目标为 Minecraft `26.3`、Java `25`；本次同步时 `main` 分支客户端版本为 `0.27.0`。实际下载仍以 Release 说明为准。
 
 ## 产物签名
 
@@ -40,13 +40,14 @@ gradle build
 gradle -p neoforge build
 ```
 
-若需要 wrapper，README 给出的生成方式为：
+仓库现在已经包含 Gradle Wrapper，可直接使用：
 
 ```bash
-gradle wrapper
 ./gradlew build
 ./gradlew -p neoforge build
 ```
+
+Windows 可使用对应的 `gradlew.bat`。如果你使用系统安装的 Gradle，当前 README 与 CI 对齐到 Gradle `9.8.0`。
 
 Fabric 构建位于 `build/libs/`，NeoForge 构建位于 `neoforge/build/libs/`。Fabric 开发客户端可通过 `gradle runClient` 启动。
 
@@ -66,4 +67,4 @@ JAR 生成于 `target/`。
 
 ## 文档来源
 
-本站根据本地两个项目 README 编写，并以客户端配置源码核对常用默认值。内容整理日期为 **2026-10-05**。协议与依赖可能随上游变动，请以实际构建及对应版本文档为准。
+本站根据本地两个项目 README 编写，并以客户端配置源码核对常用默认值。内容最近一次根据客户端 `main` 同步于 **2026-10-07**。协议与依赖可能随上游变动，请以实际构建及对应版本文档为准。

@@ -25,6 +25,7 @@ Cloth Config 提供可选的配置集成。客户端没有 Cloth Config 时以�
 | `sendDelayMs` | `250` | 发送延迟；聊天/命令模式仍受至少 1 秒约束 |
 | `hideEncryptedRawMessage` | `true` | 隐藏界面中的原始加密消息 |
 | `showProgress` | `true` | 显示发送进度 |
+| `showSentPlaintext` | `true` | 本地发送通知显示发送者、接收者和明文；关闭后只显示已发送加密消息 |
 | `showReceiveProgress` | `true` | 显示接收进度 |
 | `enableConversationHistory` | `false` | 是否保存加密会话历史 |
 | `shadowListenMode` | `false` | 监听系统消息中的聊天片段 |
@@ -54,14 +55,34 @@ Cloth Config 提供可选的配置集成。客户端没有 Cloth Config 时以�
 
 | 用途 | 默认值 | 应用范围 |
 | --- | --- | --- |
-| 长期 KEM | `CMCE/mceliece348864` | 长期公钥及 `tell` / `stell` |
-| 签名 | `Falcon-512` | 签名消息和会话交换 |
-| 临时 KEM | `ML-KEM-768` | `/k04m exchange` 的一次性密钥 |
+| 长期 KEM | `ML-KEM-768+X25519` | 长期公钥及 `tell` / `stell` |
+| 签名 | `MLDSA65-Ed25519-SHA512` | 签名消息和会话交换 |
+| 临时 KEM | `ML-KEM-768+X25519` | `/k04m exchange` 的一次性密钥 |
 | 聊天 AEAD | `AES-256-GCM` | 聊天加密；也支持 ChaCha20-Poly1305 |
 
-长期 KEM 和签名的设置只在没有本地密钥或显式重新生成密钥时应用。修改设置不会重写已有密钥。实际加密和验证根据密钥记录和协议算法标识进行。
+长期 KEM 和签名的设置只在没有本地密钥或显式重新生成密钥时应用。修改设置不会重写已有密钥。临时 KEM 独立配置，在下一次 exchange 时生效。实际加密和验证根据密钥记录和协议算法标识进行；Fabric 和 NeoForge 的算法字段均使用下拉选择器。
 
-支持的选项还包括其他 CMCE、ML-KEM、Falcon、ML-DSA，以及 SLH-DSA、SQIsign、SNOVA 参数集；以 `/k04m showalgs` 和对应版本 README 为准。加密流数据固定使用 XChaCha20-Poly1305，不跟随聊天 AEAD 设置。
+KEM 选项包括当前 Bouncy Castle 1.86 暴露的 ISO CMCE、HQC、NTRU Prime、ML-KEM，以及将这些 KEM 与 X25519 / X448 配对的混合选项。默认 `ML-KEM-768+X25519` 使用 BC 原生 `MLKEM768-X25519-SHA3-256` 组合；部分其他混合组合使用项目定义的 HKDF 组合格式，不是 X-Wing 或标准化复合 KEM。
+
+签名除 Falcon、ML-DSA、SLH-DSA、SQIsign、SNOVA 外，还包括 MAYO、HAETAE、UOV、QR-UOV、AIMer、FAEST、MQOM 和 SDitH。后八个家族还提供 `+Ed25519` / `+Ed448` 混合变体。默认 `MLDSA65-Ed25519-SHA512` 是 BC 原生 ML-DSA 复合签名之一；其他新增 PQ+EdDSA 组合使用项目自定义的版本化格式。以 `/k04m showalgs` 和对应版本 README 为准。加密流数据固定使用 XChaCha20-Poly1305，不跟随聊天 AEAD 设置。
+
+::: warning 从旧 CMCE 配置升级
+Bouncy Castle 1.86 移除了旧 round-3 CMCE 实现以及 `CMCE/mceliece348864` / `mceliece348864f`。使用这两个配置值时会迁移到 `ML-KEM-768`；旧 round-3 CMCE 密钥即使参数名仍存在，也不能由 1.86 解码。升级前应备份账号存储，CMCE 用户需要重新生成并重新交换公钥。
+:::
+
+## 配置预设
+
+主项目的 `presets/` 目录提供可直接复制到 `config/krypt04mcg.json` 的完整配置：
+
+| 预设 | 长期 KEM | 临时 KEM | 签名 |
+| --- | --- | --- | --- |
+| Default | `ML-KEM-768+X25519` | `ML-KEM-768+X25519` | `MLDSA65-Ed25519-SHA512` |
+| Compact | `CMCE/mceliece460896` | `ML-KEM-512` | `UOV-IS` |
+| CMCE + Falcon | `CMCE/mceliece8192128f` | `ML-KEM-768+X25519` | `Falcon-1024` |
+| SLH-DSA | `ML-KEM-768+X25519` | `ML-KEM-768+X25519` | `SLH-DSA-SHA2-192S` |
+| BC hybrid, category 5 | `ML-KEM-1024+X448` | `ML-KEM-1024+X448` | `MLDSA87-Ed448-SHAKE256` |
+
+预设会替换完整配置文件，但**不会重新生成已有密钥**。如果更改了长期 KEM 或签名，仍需显式执行密钥重新生成并把新公钥重新分发给联系人。
 
 ## 公钥与文件共享
 
