@@ -77,6 +77,8 @@ config/krypt04mcg/accounts/<minecraft-uuid>/
 
 Windows 使用当前用户的 DPAPI 保护存储主密钥；其他平台使用仅所有者可访问的主密钥文件。敏感写入采用原子写入，并在平台支持时应用仅所有者权限。公钥记录包含算法、所有者、UUID、完整 SHA-256 指纹、创建时间和 Base64URL 密钥数据。
 
+0.27.5 中的群组 `groups.json`、已发送密文缓存 `cache/sent-fragments.json` 和解密/旧交换重放历史 `cache/decryption-history.json` 保留 JSON 格式，读写均限制到文件所有者，并拒绝最终文件或父目录中的符号链接、悬空链接。群组和已发送缓存更新使用私有临时文件替换。此前使用链接共享这些文件时，应先备份并迁移到普通本地目录。
+
 ## 历史与备份
 
 聊天历史默认不保存到磁盘。启用 `enableConversationHistory` 后，最多最近 300 条记录存储在加密的：

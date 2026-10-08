@@ -31,13 +31,15 @@ export default defineConfig({
         { text: '项目介绍', link: '/guide/introduction' },
         { text: '安装客户端', link: '/guide/installation' },
         { text: '发送第一条消息', link: '/guide/quick-start' },
-        { text: '下载与构建', link: '/downloads' }
+        { text: '下载与构建', link: '/downloads' },
+        { text: '更新记录', link: '/releases' }
       ] },
       { text: '客户端指南', items: [
         { text: '命令参考', link: '/guide/commands' },
         { text: '配置与传输方式', link: '/guide/configuration' },
         { text: '密钥、信任与存储', link: '/guide/keys' },
-        { text: '常见问题', link: '/guide/faq' }
+        { text: '常见问题', link: '/guide/faq' },
+        { text: '反向 TCP 转发', link: '/guide/reverse-forward' }
       ] },
       { text: '服务端中继', items: [
         { text: '安装与工作方式', link: '/relay/' },

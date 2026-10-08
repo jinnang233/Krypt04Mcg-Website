@@ -1,10 +1,11 @@
 # Krypt04Mcg Website
 
-Krypt04Mcg 客户端与 Krypt04McgRelay 服务端中继的中文文档站，使用 VitePress 1.6.4 构建，部署目标为 GitHub Pages。
+Krypt04Mcg 客户端、Krypt04McgRelay 服务端中继与反向 TCP 转发扩展的中文文档站，使用 VitePress 1.6.4 构建，部署目标为 GitHub Pages。
 
-- 预期地址：<https://jinnang233.github.io/Krypt04Mcg-Website/>
+- 站点地址：<https://krypt04mcg.buranko.top/>
 - 客户端源码：<https://github.com/jinnang233/Krypt04Mcg>
 - 插件源码：<https://github.com/jinnang233/Krypt04mcg-plugin>
+- 反向转发源码：<https://github.com/jinnang233/k04m-reverseforward>
 
 ## 本地开发
 
@@ -22,7 +23,7 @@ npm run docs:build
 npm run docs:preview
 ```
 
-预览应访问命令输出的 `/Krypt04Mcg-Website/` 路径。构建产物位于 `docs/.vitepress/dist/`，不提交到 Git。
+预览访问命令输出的地址；当前配置使用根路径 `/`。构建产物位于 `docs/.vitepress/dist/`，不提交到 Git。
 
 ## GitHub Pages 部署
 
@@ -47,6 +48,6 @@ VitePress 保持稳定版 `1.6.4`，通过 npm override 使用修复过已知开
 - `docs/.vitepress/`：导航、搜索、主题和自定义首页组件。
 - `docs/public/logo.svg`：临时站点标识，等待替换为正式项目 logo。
 
-内容整理于 2026-10-05，依据相邻的 `Krypt04Mcg/README.md`、`Krypt04Mcg-plugin/README.md`，并核对客户端常用配置默认值。不自动读取相邻目录，克隆此仓库即可独立构建。
+内容最近同步于 2026-10-08，对应 Krypt04Mcg 0.27.5、Krypt04mcg-plugin 1.8.2、k04m-reverseforward 1.3.2，依据各仓库 README、更新记录与配置源码。不自动读取相邻目录，克隆此仓库即可独立构建。
 
-上游 README 对旧通道和未来流中继有不同阶段的描述，文档明确区分旧传输与当前加密流；维护时应核对两端实际版本。项目的实验性声明在首页及安全页面保留，不应写成经审计的安全保证。
+文档明确区分插件保留的旧通道与当前客户端使用的加密流，并记录接收期限、配额及存储迁移要求；维护时应核对两端实际版本。项目的实验性声明在首页及安全页面保留，不应写成经审计的安全保证。

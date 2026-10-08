@@ -10,9 +10,9 @@
 | Java | `25` |
 | Fabric Loader | `0.19.5` |
 | Fabric API | `0.162.0+26.3` |
-| NeoForge | `26.3.0.52-beta`（独立客户端构建） |
+| NeoForge | `26.3.0.57-beta`（独立客户端构建） |
 
-本次文档同步对应客户端 `main` 分支的 `0.27.0` 源码；Release 可能晚于或早于 `main`，下载时仍以具体 Release 说明为准。
+本次文档同步对应客户端 `0.27.5`，相关升级说明见[版本更新](../releases.md)。下载时仍以具体 Release 的构建状态和说明为准。
 
 ::: warning 实验环境
 请先阅读[安全与限制](../reference/security.md)。上游建议尽可能在虚拟机等隔离环境中运行，并在安装下载的 JAR 前使用 VirusTotal 或同类服务检查构建产物。

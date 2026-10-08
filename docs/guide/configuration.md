@@ -64,7 +64,7 @@ Cloth Config 提供可选的配置集成。客户端没有 Cloth Config 时以�
 
 KEM 选项包括当前 Bouncy Castle 1.86 暴露的 ISO CMCE、HQC、NTRU Prime、ML-KEM，以及将这些 KEM 与 X25519 / X448 配对的混合选项。默认 `ML-KEM-768+X25519` 使用 BC 原生 `MLKEM768-X25519-SHA3-256` 组合；部分其他混合组合使用项目定义的 HKDF 组合格式，不是 X-Wing 或标准化复合 KEM。
 
-签名除 Falcon、ML-DSA、SLH-DSA、SQIsign、SNOVA 外，还包括 MAYO、HAETAE、UOV、QR-UOV、AIMer、FAEST、MQOM 和 SDitH。后八个家族还提供 `+Ed25519` / `+Ed448` 混合变体。默认 `MLDSA65-Ed25519-SHA512` 是 BC 原生 ML-DSA 复合签名之一；其他新增 PQ+EdDSA 组合使用项目自定义的版本化格式。以 `/k04m showalgs` 和对应版本 README 为准。加密流数据固定使用 XChaCha20-Poly1305，不跟随聊天 AEAD 设置。
+签名除 Falcon、ML-DSA、SLH-DSA、SQIsign、SNOVA 外，还包括 MAYO、HAETAE、UOV、QR-UOV、AIMer、FAEST、MQOM 和 SDitH。所有支持的后量子签名参数都提供 `+Ed25519` / `+Ed448` 混合变体，包括 Falcon、SLH-DSA 的预哈希变体和 SNOVA。默认 `MLDSA65-Ed25519-SHA512` 是 BC 原生 ML-DSA 复合签名之一；显式的 `ML-DSA-65+Ed25519` 等选择使用项目自定义的版本化格式，两份签名均须有效。采用新长期签名套件需要重新生成密钥、交换公钥并核对指纹，双方也须支持该标识。以 `/k04m showalgs` 和对应版本 README 为准。加密流数据固定使用 XChaCha20-Poly1305，不跟随聊天 AEAD 设置。
 
 ::: warning 从旧 CMCE 配置升级
 Bouncy Castle 1.86 移除了旧 round-3 CMCE 实现以及 `CMCE/mceliece348864` / `mceliece348864f`。使用这两个配置值时会迁移到 `ML-KEM-768`；旧 round-3 CMCE 密钥即使参数名仍存在，也不能由 1.86 解码。升级前应备份账号存储，CMCE 用户需要重新生成并重新交换公钥。
@@ -97,6 +97,8 @@ Bouncy Castle 1.86 移除了旧 round-3 CMCE 实现以及 `CMCE/mceliece348864` 
 | `permanentlyDisableFileSharing` | `false` |
 
 文件最大 **10 MiB**，文件名和内容均加密并认证。只有收到完整流和经过认证的 EOF 后才显示接收提议。明确接受并重新检查身份/信任后，文件保存到 `received-files`，使用清理过的名称与随机前缀，不会自动打开或执行。
+
+0.27.5 的内置文件接收从接纳流起计算固定 **两分钟总期限**，必须在期限内收到完整内容和认证 EOF；继续收到少量数据不会续期。到期会取消读取并释放共享工作线程，极慢的合法传输需重试。普通流 API 保留原有 60 秒空闲超时。
 
 最多四个提议（其中最多一个文件）等待同意，期限为 60 秒。禁用共享、断线或切换传输模式会取消正在进行的文件操作。`/k04m-share disable-files` 或 `permanentlyDisableFileSharing=true` 会持久化账号级文件共享锁。
 

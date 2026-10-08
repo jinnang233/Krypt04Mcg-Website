@@ -12,8 +12,9 @@
 | --- | --- | --- |
 | 客户端 | Fabric / NeoForge 对应模组 JAR | [Krypt04Mcg Releases](https://github.com/jinnang233/Krypt04Mcg/releases) |
 | 中继插件 | Krypt04McgRelay JAR | [插件 Releases](https://github.com/jinnang233/Krypt04mcg-plugin/releases) |
+| 反向 TCP 转发 | Fabric / NeoForge 对应扩展 JAR | [k04m-reverseforward Releases](https://github.com/jinnang233/k04m-reverseforward/releases) |
 
-安装步骤分别见[客户端安装](./guide/installation.md)和[中继安装](./relay/index.md)。项目 README 当前目标为 Minecraft `26.3`、Java `25`；本次同步时 `main` 分支客户端版本为 `0.27.0`。实际下载仍以 Release 说明为准。
+安装步骤见[客户端安装](./guide/installation.md)、[中继安装](./relay/index.md)和[反向转发](./guide/reverse-forward.md)。本次文档对应客户端 **0.27.5**、中继插件 **1.8.2**、反向转发 **1.3.2**，目标为 Minecraft `26.3`、Java `25`。安全修复和升级注意事项见[更新记录](./releases.md)；实际下载以对应 Release 已生成的产物和说明为准。
 
 ## 产物签名
 
@@ -61,10 +62,21 @@ mvn package
 
 JAR 生成于 `target/`。
 
+### 反向转发扩展
+
+使用 Java 25、Gradle `9.5.1`。先把 Krypt04Mcg 的 Fabric 发布 JAR 放到扩展仓库的 `libs/Krypt04Mcg.jar`，作为编译依赖，再运行：
+
+```bash
+gradle build
+gradle -p neoforge build
+```
+
+产物分别为 `build/libs/k04m-reverse-forward-fabric-1.3.2.jar` 和 `neoforge/build/libs/k04m-reverse-forward-neoforge-1.3.2.jar`。NeoForge 游戏实例仍应安装核心和扩展各自的 NeoForge 构建；编译用的 Fabric JAR 不随扩展打包。
+
 ## 上游自动构建
 
-客户端在推送 `v*` 标签时构建并发布；手动触发可生成 `snapshot-YYYYMMDD-HHMMSS` 发布。插件有构建及发布 workflow，也支持标签或手动发布。可在对应仓库 Actions 查看结果。
+客户端、插件和反向转发均在推送 `v*` 标签时构建并发布，也支持手动发布。手动触发可生成 `snapshot-YYYYMMDD-HHMMSS` 发布。Tag 存在不代表产物已经构建完成，可在对应仓库 Actions 查看结果。
 
 ## 文档来源
 
-本站根据本地两个项目 README 编写，并以客户端配置源码核对常用默认值。内容最近一次根据客户端 `main` 同步于 **2026-10-07**。协议与依赖可能随上游变动，请以实际构建及对应版本文档为准。
+本站根据客户端、中继和反向转发的 README、更新记录及配置源码编写，最近一次同步于 **2026-10-08**。协议与依赖可能随上游变动，请以实际构建及对应版本文档为准。
