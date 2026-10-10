@@ -1,3 +1,4 @@
+/* Defines the documentation theme colors, typography and homepage presentation. */
 :root {
   --vp-c-brand-1: #147d65;
   --vp-c-brand-2: #10836a;
@@ -8,6 +9,7 @@
   --vp-button-brand-bg: #14856c;
   --vp-button-brand-hover-bg: #106d58;
 }
+/* Adjusts the theme palette for the dark appearance. */
 .dark {
   --vp-c-brand-1: #7ae0b7;
   --vp-c-brand-2: #65cfaa;

@@ -2,6 +2,10 @@ import { defineConfig } from 'vitepress'
 
 const base = '/'
 
+/**
+ * Defines the public documentation site through the VitePress configuration helper.
+ * Navigation, search and metadata describe documentation; they do not configure encryption.
+ */
 export default defineConfig({
   lang: 'zh-CN',
   title: 'Krypt04Mcg',

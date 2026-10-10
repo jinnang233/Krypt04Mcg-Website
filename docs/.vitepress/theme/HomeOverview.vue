@@ -1,7 +1,12 @@
 <script setup>
+/**
+ * Uses the VitePress URL helper to prefix local documentation links with the site base.
+ * These fixed navigation paths do not perform authentication or cryptographic operations.
+ */
 import { withBase } from 'vitepress'
 </script>
 
+<!-- Presents static project guidance and links to installation and security documentation. -->
 <template>
   <div class="home-overview">
     <div class="project-notice">
