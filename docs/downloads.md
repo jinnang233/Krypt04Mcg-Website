@@ -12,7 +12,7 @@
 | --- | --- | --- |
 | 客户端 | Fabric / NeoForge 对应模组 JAR | [Krypt04Mcg Releases](https://github.com/jinnang233/Krypt04Mcg/releases) |
 | 中继插件 | Krypt04McgRelay JAR | [插件 Releases](https://github.com/jinnang233/Krypt04mcg-plugin/releases) |
-| 反向 TCP 转发 | Fabric / NeoForge 对应扩展 JAR | [k04m-reverseforward Releases](https://github.com/jinnang233/k04m-reverseforward/releases) |
+| 反向 TCP 转发 | Fabric / NeoForge 对应扩展 JAR | 由于个人因素仓库已隐藏 |
 
 安装步骤见[客户端安装](./guide/installation.md)、[中继安装](./relay/index.md)和[反向转发](./guide/reverse-forward.md)。本次文档对应客户端 **0.29.0**、中继插件 **1.9.0**、反向转发 **1.3.2**，目标为 Minecraft `26.3`、Java `25`。安全修复和升级注意事项见[更新记录](./releases.md)；实际下载以对应 Release 已生成的产物和说明为准。
 
